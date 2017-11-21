@@ -37,5 +37,11 @@ class youtubeseries extends Module { // reikia sukurti klase su tokiu pat pav ka
            
         return false;
     }
+    
+    public function hookDisplayBanner() 
+    {
+        return "Hello";
+        
+    }
 }
     
