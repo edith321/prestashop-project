@@ -45,7 +45,11 @@ class youtubeseries extends Module { // reikia sukurti klase su tokiu pat pav ka
     }
     
     public function getContent() { // for creating a module configuration page
-        /*return "Hello am okay";*/
+        if(Tools::getValue("youtube_txt")) { // Tolls - is a predefined class in prestashop to receive requested values, here it checks whether a value is being submitted from the form
+            $this->context->smarty->assign(array( 
+                "submit_form" => true
+            ));
+        }
         return $this->display(__FILE__, "views/admin/admin.tpl");
     }
     
