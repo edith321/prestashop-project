@@ -44,7 +44,7 @@ class youtubeseries extends Module { // reikia sukurti klase su tokiu pat pav ka
       return true;
     }
     
-    public function hookDisplayBanner() {
+    public function hookDisplayBanner() { // makes the text appear on the banner
         return "Hello world";
         
     }
