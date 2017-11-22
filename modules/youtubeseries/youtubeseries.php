@@ -46,16 +46,27 @@ class youtubeseries extends Module { // reikia sukurti klase su tokiu pat pav ka
     
     public function getContent() { // for creating a module configuration page
         if(Tools::getValue("youtube_txt")) { // Tolls - is a predefined class in prestashop to receive requested values, here it checks whether a value is being submitted from the form
-            $this->context->smarty->assign(array( 
-                "submit_form" => true
-            ));
+            $message = Tools::getValue("youtube_txt"); // we store the submitted value from the form into a variable
+            $status = false;                         
+            // the data in prestashop is being saved in a ps_configuration table
+            if(ConfigurationCore::updateValue("YOUTUBE_MESSAGE_TUTORIAL", $message)) { // ConfigurationCore class is being used to store data into DB, updateValue() - takes $key and $value parameters. updateValue() - if it doesn't find a key it creates, so it creates or updates 
+                $status = true; // we create a status value for displaying whether the value was saved succesfully
+                $this->context->smarty->assign(array( 
+                    "submit_form" => true,
+                    "status" => $status
+                ));   
+            }
+            
+                                       
         }
+        
         return $this->display(__FILE__, "views/admin/admin.tpl");
     }
     
     public function hookDisplayBanner() { // makes the text appear on the banner
+        $message = ConfigurationCore::get("YOUTUBE_MESSAGE_TUTORIAL"); // we receive data saved in the db under the key - YOUTUBE_MESSAGE_TUTORIAL
         $this->context->smarty->assign(array( // we put the values of template files into var and display in template using smarty
-            "Message" => "This is a message",
+            "Message" => $message, // we display the message from the db to front end
             "Description" => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
         ));
         return $this->display(__FILE__, "views/banner.tpl"); // we need to call the template
