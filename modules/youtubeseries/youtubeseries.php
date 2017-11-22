@@ -6,6 +6,7 @@ if (!defined('_PS_VERSION_'))
 class youtubeseries extends Module { // reikia sukurti klase su tokiu pat pav kaip ir failas, kaip ir folderis ir turi extendint Module  prestashopo klase
     private $url; // sukuriamas kintamasis, prasideda oop
     
+    
     public function __construct()
 	{
 		$this->name = 'youtubeseries'; // name of the plugin
@@ -44,6 +45,7 @@ class youtubeseries extends Module { // reikia sukurti klase su tokiu pat pav ka
       return true;
     }
     
+    
     public function getContent() { // for creating a module configuration page
         if(Tools::getValue("youtube_txt")) { // Tolls - is a predefined class in prestashop to receive requested values, here it checks whether a value is being submitted from the form
             $message = Tools::getValue("youtube_txt"); // we store the submitted value from the form into a variable
@@ -55,13 +57,11 @@ class youtubeseries extends Module { // reikia sukurti klase su tokiu pat pav ka
                     "submit_form" => true,
                     "status" => $status
                 ));   
-            }
-            
-                                       
+            }                            
         }
-        
         return $this->display(__FILE__, "views/admin/admin.tpl");
     }
+    
     
     public function hookDisplayBanner() { // makes the text appear on the banner
         $message = ConfigurationCore::get("YOUTUBE_MESSAGE_TUTORIAL"); // we receive data saved in the db under the key - YOUTUBE_MESSAGE_TUTORIAL
