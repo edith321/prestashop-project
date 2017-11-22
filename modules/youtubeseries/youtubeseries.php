@@ -45,7 +45,11 @@ class youtubeseries extends Module { // reikia sukurti klase su tokiu pat pav ka
     }
     
     public function hookDisplayBanner() { // makes the text appear on the banner
-        return "Hello world";
+        $this->context->smarty->assign(array( // we put the values of template files into var and display in template using smarty
+            "Message" => "This is a message",
+            "Description" => "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+        ));
+        return $this->display(__FILE__, "views/banner.tpl"); // we need to call the template
         
     }
 }
