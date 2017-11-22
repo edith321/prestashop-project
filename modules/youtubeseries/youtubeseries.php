@@ -44,8 +44,9 @@ class youtubeseries extends Module { // reikia sukurti klase su tokiu pat pav ka
       return true;
     }
     
-    public function getContent() {
-        return "Hello am okay";
+    public function getContent() { // for creating a module configuration page
+        /*return "Hello am okay";*/
+        return $this->display(__FILE__, "views/admin/admin.tpl");
     }
     
     public function hookDisplayBanner() { // makes the text appear on the banner
