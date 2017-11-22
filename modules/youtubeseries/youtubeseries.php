@@ -27,20 +27,25 @@ class youtubeseries extends Module { // reikia sukurti klase su tokiu pat pav ka
 		$this->hooks_tpl_path = _PS_MODULE_DIR_.$this->name.'/views/templates/hooks/';*/ 
 	}
     
-    public function install() // installation function
-    {
-       if (!parent::install() || 
-			!$this->registerHook('displayHeader') || //display header and footer
-			!$this->registerHook('displayFooter') 
-		)
-           return false; // if any of these conditions fail return false and don't install the module
-           
+    public function install() {
+      if (!parent::install() ||
+        !$this->registerHook('displayHeader') ||
+        !$this->registerHook('displayBanner')) {
         return false;
+      }
+      return true;
     }
     
-    public function hookDisplayBanner() 
-    {
-        return "Hello";
+    
+    public function uninstall() {
+      if (!parent::uninstall()) {
+        return false;
+      }
+      return true;
+    }
+    
+    public function hookDisplayBanner() {
+        return "Hello world";
         
     }
 }
